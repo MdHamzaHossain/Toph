@@ -18,8 +18,11 @@ async function main() {
         const formattedTitle = formatTitleString(title);
 
         const comments = await r1.question("Add any additional comments: \n");
-        const pathToQuestion = join(pathToToph, formattedTitle);
-        await fsp.mkdir(pathToQuestion, { recursive: true });
+
+        const indexNum = (await fsp.readdir(pathToToph)).at(-1)?.match(/\d/)?.[0] || 0;
+        const pathToQuestion = join(pathToToph, `${+indexNum + 1}. ` + formattedTitle);
+
+        await fsp.mkdir(`${pathToQuestion}`, { recursive: true });
 
         const templateMD = await fsp.readFile((process.cwd(), "template.md"), { encoding: "utf-8" });
         const content = templateMD
