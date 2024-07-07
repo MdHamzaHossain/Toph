@@ -5,7 +5,7 @@ import { stdin as input, stdout as output } from "node:process";
 
 const r1 = readline.createInterface({ input, output });
 const pathToToph = join(process.cwd(), "../", "toph");
-// The list of languages I use 
+// The list of languages I use
 const listOfExt = ["c", "cpp", "js", "py", "go", "kt", "java"];
 main();
 async function main() {
@@ -28,7 +28,7 @@ async function main() {
             .replaceAll(/{{%title}}/g, title);
 
         await fsp.writeFile(join(pathToQuestion, "README.md"), content);
-        
+
         const fileExtensions = (
             await r1.question(
                 "In which language(s) did you solve this question?\n" +
