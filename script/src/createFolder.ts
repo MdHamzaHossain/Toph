@@ -6,7 +6,7 @@ import { stdin as input, stdout as output } from "node:process";
 const r1 = readline.createInterface({ input, output });
 const pathToToph = join(process.cwd(), "../", "toph");
 // The list of languages I use
-const listOfExt = ["c", "cpp", "js", "py", "go", "kt", "java"];
+const listOfExt = ["c", "cpp", "js", "golfjs", "py", "go", "kt", "java"];
 main();
 async function main() {
     // eslint-disable-next-line no-constant-condition
@@ -44,7 +44,10 @@ async function main() {
         await Promise.all(
             listOfExt.map((ext) => {
                 if (fileExtensions.includes(ext)) {
-                    return fsp.writeFile(join(pathToQuestion, `${ext.toUpperCase()} ${formattedTitle}.${ext}`), "");
+                    return fsp.writeFile(
+                        join(pathToQuestion, `${ext.toUpperCase()} ${formattedTitle}.${ext.replace("golfjs", "js")}`),
+                        "",
+                    );
                 }
             }),
         );
