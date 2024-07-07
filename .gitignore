@@ -1,2 +1,4 @@
-/Script/createQuestionFolder.o
-/Script/createQuestionFolder
+script/node_modules
+script/package-lock.json
+script/dist
+script/createFolder.js
