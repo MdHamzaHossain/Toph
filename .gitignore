@@ -3,3 +3,4 @@ script/package-lock.json
 script/dist
 script/createFolder.js
 **/tempCodeRunnerFile.*
+.vscode
