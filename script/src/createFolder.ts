@@ -18,8 +18,20 @@ async function main() {
         const formattedTitle = formatTitleString(title);
 
         const comments = await r1.question("Add any additional comments: \n");
-
-        const indexNum = (await fsp.readdir(pathToToph)).at(-1)?.match(/\d+/)?.[0] || 0;
+        const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
+        const readDir = await fsp.readdir(pathToToph);
+        if (
+            readDir.find((a) => {
+                return formattedTitle === a.match(titleAndIndexMatcherRegex)?.groups?.Title;
+            })
+        ) {
+            console.log("You already have an entry with the same title");
+            continue;
+        }
+        const matchedDir = readDir.at(-1)?.match(titleAndIndexMatcherRegex);
+        const { Index } = matchedDir?.groups || {};
+        const indexNum = +Index || 0;
+        //const indexNum = a.at(-1)?.match(/(?<Index>\d+)\. (<Title>?.+)/)?.[0] || 0;
         const pathToQuestion = join(pathToToph, `${+indexNum + 1}`.padStart(4, "0") + ". " + formattedTitle);
 
         await fsp.mkdir(`${pathToQuestion}`, { recursive: true });

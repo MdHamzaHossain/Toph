@@ -4,9 +4,11 @@
   "description": "My solutions for toph questions",
   "main": "dist/index.ts",
   "dependencies": {
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.2",
+    "typescript": "^4.9.3"
   },
   "scripts": {
+    "tsc": "tsc",
     "createfolder": "tsc && node dist/createFolder.js"
   },
   "devDependencies": {
@@ -18,8 +20,7 @@
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.8.0",
-    "typescript": "^4.9.3"
+    "prettier": "^2.8.0"
   },
   "repository": {
     "type": "git",
