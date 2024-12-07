@@ -1,3 +1,6 @@
+> THIS IS NOW A PUBLIC ARCHIVE! 
+\
+Go to [competitive-programming](https://github.com/MdHamzaHossain/competitive-programming) where I archive everything
 # TOPH Solutions by [Hamza Hossain](https://toph.co/u/hamzahossain)
 ## What is this?
 A documentation of all the solutions I have made for every toph problem using multiple different languages.\
