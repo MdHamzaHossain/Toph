@@ -6,7 +6,7 @@ import { stdin as input, stdout as output } from "node:process";
 const r1 = readline.createInterface({ input, output });
 const pathToToph = join(process.cwd(), "../", "toph");
 // The list of languages I use
-const listOfExt = ["c", "cpp", "js", "golfjs", "py", "go", "kt", "java"];
+const listOfExt = ["c", "cpp", "js", "golfjs", "py", "go", "kt", "java", "rs", "lua", "swift"];
 main();
 async function main() {
     // eslint-disable-next-line no-constant-condition
