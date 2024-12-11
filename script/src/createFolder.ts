@@ -2,13 +2,18 @@ import * as fsp from "fs/promises";
 import { join } from "path";
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
+import fGlob from "fast-glob";
 
 const r1 = readline.createInterface({ input, output });
 const pathToToph = join(process.cwd(), "../", "toph");
 // The list of languages I use
 let listOfExt = ["c", "cpp", "js", "golfjs", "py", "go", "kt", "java", "rs", "lua", "swift"];
+const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
+
 main();
 async function main() {
+    generateGraphTable();
+
     // eslint-disable-next-line no-constant-condition
     while (true) {
         const url = await r1.question("Enter the toph url: \n");
@@ -17,11 +22,14 @@ async function main() {
         if (!title) process.exit();
         const formattedTitle = formatTitleString(title);
 
-        const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
         const readDir = await fsp.readdir(pathToToph);
-        const foundDir = readDir.find((a) => {
-            return formattedTitle === a.match(titleAndIndexMatcherRegex)?.groups?.Title;
-        });
+        // Take out the readme
+        readDir.pop();
+        const foundDir = readDir
+            .find((a) => {
+                return formattedTitle === a.match(titleAndIndexMatcherRegex)?.groups?.Title;
+            })
+            ?.trim();
 
         if (foundDir) {
             console.log("You already have an entry with the same title. The missing language variants will be added");
@@ -80,4 +88,9 @@ async function main() {
 }
 function formatTitleString(str: string): string {
     return str[0].toUpperCase() + str.slice(1).replace(/-(?<T>.)/g, (v: string) => v.replace("-", " ").toUpperCase());
+}
+async function generateGraphTable() {
+    const mainFolders = await fGlob("../toph/**/**");
+    //await fsp.readdir(pathToToph);
+    console.log(mainFolders);
 }
