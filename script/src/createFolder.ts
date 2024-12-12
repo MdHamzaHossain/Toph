@@ -12,8 +12,8 @@ const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
 
 main();
 async function main() {
-    //TODO generateGraphTable();
-
+    //TODO
+    //! generateGraphTable();
     // eslint-disable-next-line no-constant-condition
     while (true) {
         const url = await r1.question("Enter the toph url: \n");
