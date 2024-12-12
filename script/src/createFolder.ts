@@ -91,6 +91,6 @@ function formatTitleString(str: string): string {
 }
 async function generateGraphTable() {
     const mainFolders = await fGlob("../toph/**/**");
-    //await fsp.readdir(pathToToph);
+    await fsp.readdir(pathToToph);
     console.log(mainFolders);
 }
