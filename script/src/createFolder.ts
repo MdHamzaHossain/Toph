@@ -12,7 +12,7 @@ const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
 
 main();
 async function main() {
-    generateGraphTable();
+    //TODO generateGraphTable();
 
     // eslint-disable-next-line no-constant-condition
     while (true) {
