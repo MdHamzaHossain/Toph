@@ -89,6 +89,7 @@ async function main() {
 function formatTitleString(str: string): string {
     return str[0].toUpperCase() + str.slice(1).replace(/-(?<T>.)/g, (v: string) => v.replace("-", " ").toUpperCase());
 }
+// TODO
 async function generateGraphTable() {
     const mainFolders = await fGlob("../toph/**/**");
     await fsp.readdir(pathToToph);
