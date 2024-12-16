@@ -1,4 +1,4 @@
-> THIS IS NOW A PUBLIC ARCHIVE! 
+> THIS IS SOON TO BE A PUBLIC ARCHIVE! 
 \
 Go to [competitive-programming](https://github.com/MdHamzaHossain/competitive-programming) where I archive everything
 # TOPH Solutions by [Hamza Hossain](https://toph.co/u/hamzahossain)
