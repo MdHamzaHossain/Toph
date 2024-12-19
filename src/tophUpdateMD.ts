@@ -7,20 +7,19 @@ main();
 async function main() {
     const pathToToph = join(process.cwd(), "toph");
     // The list of languages I use
-    let listOfExt = ["c", "cpp", "js", "py", "go", "kt", "java", "rs", "lua", "swift"].sort();
+    const listOfExt = ["c", "cpp", "js", "py", "go", "kt", "java", "rs", "lua", "swift"].sort();
     const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
 
-    let fileObj: { [index: string]: number } = {};
+    const fileObj: { [index: string]: number } = {};
     listOfExt.forEach((a) => (fileObj[a] = 0));
 
     const mainFolders = await FastGlob("toph/**/**");
     const fileMapper = new Map<string, string[]>();
 
-    let problemTrackerArray: string[][] = [
-        ["Problem name", ...listOfExt],
-    ];
+    const problemTrackerArray: string[][] = [["Problem name", ...listOfExt]];
 
     for (const folder of mainFolders) {
+        if (folder.includes("tempCodeRunnerFile")) continue;
         const file = folder.split("/").at(-2) || "";
         const matchedDir = file.match(titleAndIndexMatcherRegex);
         const { Index, Title } = matchedDir?.groups || {};
@@ -31,12 +30,12 @@ async function main() {
         if (extensionIndex < 0) continue;
         const url = formattedTitleToURL(Title);
         const hyperLinked = `[${file}](${url})`;
-        let mapEntry =
+        const mapEntry =
             fileMapper.get(hyperLinked) ??
             fileMapper
                 .set(
                     hyperLinked,
-                    Array.from({ length: listOfExt.length }, (a: undefined) => ""),
+                    Array.from({ length: listOfExt.length }, () => ""),
                 )
                 .get(hyperLinked)!;
 
@@ -44,30 +43,34 @@ async function main() {
         fileObj[fileExtension]++;
     }
     for (const [name, ind] of fileMapper.entries()) {
-      const resultArray: string[] = [name, ...ind.map((a) => a || "❎")];
-      problemTrackerArray.push(resultArray);
+        const resultArray: string[] = [name, ...ind.map((a) => a || "❎")];
+        problemTrackerArray.push(resultArray);
     }
 
     const counterArray: string[][] = [["Language", "Solves"]];
     let totalCounter = 0;
-    listOfExt.forEach((a, i) => {
+    listOfExt.forEach((a) => {
         counterArray.push([a, "" + fileObj[a]]);
         totalCounter += fileObj[a];
     });
     counterArray.push(["Total", "" + totalCounter]);
 
-
-    const completeString = 
-      "### Amount of solves" + "\n\n" +
-      markdownTable(counterArray) + "\n\n\n" 
-      + "### Problems" + "\n\n" + markdownTable(
-        problemTrackerArray.sort((a, b) => {
-            return parseInt(a[0].substring(1,5)) - parseInt(b[0].substring(1,5));
-        }),
-    )+ "\n";
+    const completeString =
+        "### Amount of solves" +
+        "\n\n" +
+        markdownTable(counterArray) +
+        "\n\n\n" +
+        "### Problems" +
+        "\n\n" +
+        markdownTable(
+            problemTrackerArray.sort((a, b) => {
+                return parseInt(a[0].substring(1, 5)) - parseInt(b[0].substring(1, 5));
+            }),
+        ) +
+        "\n";
     await fsp.writeFile(join(pathToToph, "README.md"), completeString);
 
-    const oldReadMe = await fsp.readFile(join(pathToToph, "../README.md"), {"encoding": "utf-8"});
+    const oldReadMe = await fsp.readFile(join(pathToToph, "../README.md"), { encoding: "utf-8" });
     const oldReadMeData = oldReadMe.split("## Stats")[0] || "";
     await fsp.writeFile(join(pathToToph, "../README.md"), oldReadMeData + "## Stats\n\n" + completeString);
 }

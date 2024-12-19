@@ -2,7 +2,6 @@ import * as fsp from "fs/promises";
 import { join } from "path";
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
-import fGlob from "fast-glob";
 
 const r1 = readline.createInterface({ input, output });
 const pathToToph = join(process.cwd(), "toph");
@@ -12,9 +11,6 @@ const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
 
 main();
 async function main() {
-    //TODO
-    //! generateGraphTable();
-    // eslint-disable-next-line no-constant-condition
     while (true) {
         const url = await r1.question("Enter the toph url: \n");
 
@@ -88,10 +84,4 @@ async function main() {
 }
 function formatTitleString(str: string): string {
     return str[0].toUpperCase() + str.slice(1).replace(/-(?<T>.)/g, (v: string) => v.replace("-", " ").toUpperCase());
-}
-// TODO
-async function generateGraphTable() {
-    const mainFolders = await fGlob("../toph/**/**");
-    await fsp.readdir(pathToToph);
-    console.log(mainFolders);
 }
