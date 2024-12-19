@@ -13,7 +13,7 @@
   "scripts": {
     "tsc": "tsc",
     "createfolder": "tsc && node dist/createFolder.js",
-    "testHusky": "tsc && node dist/huskyHarris.js",
+    "updateTophReadMe": "tsc && node dist/tophUpdateMD.js",
     "prepare": "husky"
   },
   "devDependencies": {
