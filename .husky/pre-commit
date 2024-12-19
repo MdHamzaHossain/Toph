@@ -1,2 +1,2 @@
-npm run testHusky
+npm run updateTophReadMe
 git update-index --again
