@@ -1,1 +1,2 @@
 npm run testHusky
+git update-index --again
