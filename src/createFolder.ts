@@ -5,7 +5,7 @@ import { stdin as input, stdout as output } from "node:process";
 import fGlob from "fast-glob";
 
 const r1 = readline.createInterface({ input, output });
-const pathToToph = join(process.cwd(), "../", "toph");
+const pathToToph = join(process.cwd(), "toph");
 // The list of languages I use
 let listOfExt = ["c", "cpp", "js", "golfjs", "py", "go", "kt", "java", "rs", "lua", "swift"];
 const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
