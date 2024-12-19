@@ -39,7 +39,7 @@ async function main(){
       console.log(hyperLinked);
       let mapEntry = fileMapper.get(hyperLinked) ?? (fileMapper.set(hyperLinked, Array.from({length: listOfExt.length}, (a:undefined) => "")).get(hyperLinked)!);
 
-      mapEntry[extensionIndex] = `[${fileExtension}](${folder})`;
+      mapEntry[extensionIndex] = `[${fileExtension}](<../${folder}>)`;
       fileObj[fileExtension]++;
 
     }
