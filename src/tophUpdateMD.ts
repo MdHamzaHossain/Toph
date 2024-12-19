@@ -18,9 +18,6 @@ async function main() {
 
     let problemTrackerArray: string[][] = [
         ["Problem name", ...listOfExt],
-
-        // ["Test", ...Array.from({length: listOfExt.length}, (e:undefined, i) => ""+i)],
-        // ["Test", ...Array.from({length: listOfExt.length}, (e:undefined, i) => ""+i)]
     ];
 
     for (const folder of mainFolders) {
@@ -28,7 +25,6 @@ async function main() {
         const matchedDir = file.match(titleAndIndexMatcherRegex);
         const { Index, Title } = matchedDir?.groups || {};
         if (!Index || !Title) continue;
-        //console.log(Index, Title);
 
         const fileExtension = folder.split(".").pop() || "";
         const extensionIndex = listOfExt.indexOf(fileExtension);
@@ -48,12 +44,8 @@ async function main() {
         fileObj[fileExtension]++;
     }
     for (const [name, ind] of fileMapper.entries()) {
-        const resultArray: string[] = [name, ...ind.map((a) => a || "❎")];
-        //console.log(resultArray);
-        problemTrackerArray.push(resultArray);
-        // ind.reduce((p,c,ind) => {
-        //   if(!c) p.push("❎")
-        // }, [])
+      const resultArray: string[] = [name, ...ind.map((a) => a || "❎")];
+      problemTrackerArray.push(resultArray);
     }
 
     const counterArray: string[][] = [["Language", "Solves"]];
@@ -70,8 +62,7 @@ async function main() {
       markdownTable(counterArray) + "\n\n\n" 
       + "### Problems" + "\n\n" + markdownTable(
         problemTrackerArray.sort((a, b) => {
-            //@ts-ignore
-            return a[0] - b[0];
+            return parseInt(a[0].substring(1,5)) - parseInt(b[0].substring(1,5));
         }),
     )+ "\n";
     await fsp.writeFile(join(pathToToph, "README.md"), completeString);
