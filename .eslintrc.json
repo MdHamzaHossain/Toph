@@ -36,5 +36,6 @@
         "no-var": "error",
         "prefer-const": "error",
         "@typescript-eslint/no-non-null-assertion": "off"
-    }
+    },
+    "ignorePatterns": ["!script"]
 }

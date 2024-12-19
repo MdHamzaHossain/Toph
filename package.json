@@ -13,7 +13,7 @@
   "scripts": {
     "tsc": "tsc",
     "createfolder": "tsc && node dist/createFolder.js",
-    "updateTophReadMe": "tsc && node dist/tophUpdateMD.js",
+    "updatetophreadme": "tsc && node dist/tophUpdateMD.js",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -36,5 +36,6 @@
   "bugs": {
     "url": "https://github.com/MdHamzaHossain/Toph/issues"
   },
-  "homepage": "https://github.com/MdHamzaHossain/Toph#readme"
+  "homepage": "https://github.com/MdHamzaHossain/Toph#readme",
+  "type": "module"
 }
