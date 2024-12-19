@@ -2,18 +2,19 @@ import * as fsp from "fs/promises";
 import { join } from "path";
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
+import { supportedLanguages } from "./config.js";
 
 const r1 = readline.createInterface({ input, output });
 const pathToToph = join(process.cwd(), "toph");
 // The list of languages I use
-let listOfExt = ["c", "cpp", "js", "golfjs", "py", "go", "kt", "java", "rs", "lua", "swift"];
+
 const titleAndIndexMatcherRegex = /(?<Index>\d+)\. (?<Title>.+)/;
 
 main();
 async function main() {
     while (true) {
         const url = await r1.question("Enter the toph url: \n");
-
+        let listOfExt = supportedLanguages;
         const title = url.split("/")?.pop() || "";
         if (!title) process.exit();
         const formattedTitle = formatTitleString(title);
