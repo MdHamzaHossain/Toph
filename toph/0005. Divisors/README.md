@@ -1,3 +1,3 @@
 # [Divisors](https://toph.co/p/divisors)
 __COMMENTS__
-> js, cpp 
+just loop and find divisors
